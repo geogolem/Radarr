@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using NLog;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Instrumentation.Extensions;
@@ -56,6 +57,164 @@ namespace NzbDrone.Core.Movies
             _logger = logger;
         }
 
+        public class OmdbObject
+        {
+            public string Title { get; set; }
+            public string Year { get; set; }
+            public string Rated { get; set; }
+            public string Released { get; set; }
+            public string Runtime { get; set; }
+            public string Genre { get; set; }
+            public string Director { get; set; }
+            public string Writer { get; set; }
+            public string Actors { get; set; }
+            public string Plot { get; set; }
+            public string Language { get; set; }
+            public string Country { get; set; }
+            public string Awards { get; set; }
+            public string Poster { get; set; }
+            public string Metascore { get; set; }
+            public string imdbRating { get; set; }
+            public string imdbVotes { get; set; }
+            public string imdbID { get; set; }
+            public string Type { get; set; }
+            public string tomatoMeter { get; set; }
+            public string tomatoImage { get; set; }
+            public string tomatoRating { get; set; }
+            public string tomatoReviews { get; set; }
+            public string tomatoFresh { get; set; }
+            public string tomatoRotten { get; set; }
+            public string tomatoConsensus { get; set; }
+            public string tomatoUserMeter { get; set; }
+            public string tomatoUserRating { get; set; }
+            public string tomatoUserReviews { get; set; }
+            public string tomatoURL { get; set; }
+            public string DVD { get; set; }
+            public string BoxOffice { get; set; }
+            public string Production { get; set; }
+            public string Website { get; set; }
+            public string Response { get; set; }
+        }
+
+        public Tuple<DateTime?, DateTime?> determineReleaseDates(DateTime? tmdbInCinemas, DateTime? tmdbPhysicalRelease, string imdbId)
+        {
+            //Summary:
+            // if THEMOVIEDB returns both a physical and cinemas date use those and stop
+            // otherwise THEMOVIEDB returned partial or no information so check OMDBAPI
+            // if OMDBAPI returns both a physical and cinema date use those and stop
+            // at this pointif we are still going, both OMDBAPI and THEMOVIEDB each returned no or partial information
+            // if both OMDBAPI and THEMOVIEDB returned partial information and the partial info doesnt overlap construct full information
+            // if the full information constructed makes sense, use that and stop
+            // at this point we know full information is not going to be available
+            // if THEMOVIEDB had partial information, use it and stop
+            // if OMDBAPI returns partial information use it and stop
+            // if we got here both OMDBAPI and THEMOVIEDB return no information, no information is propagated and we stop.
+            if (tmdbInCinemas.HasValue && tmdbPhysicalRelease.HasValue)
+            {
+                if (tmdbPhysicalRelease.Value.Subtract(tmdbInCinemas.Value).Duration().TotalSeconds < 60 * 60 * 24 * 15)
+                {
+                    tmdbPhysicalRelease = tmdbInCinemas;
+                }
+
+                if (tmdbInCinemas <= tmdbPhysicalRelease)
+                {
+                    return Tuple.Create(tmdbInCinemas, tmdbPhysicalRelease);
+                }
+            }
+
+            //lets augment the releasedate information with info from omdbapi
+            string data;
+            using (WebClient client = new WebClient())
+            {
+                data = client.DownloadString("http://www.omdbapi.com/?i=" + imdbId + "&tomatoes=true&plot=short&r=json&apikey=" + _configService.OmdbApiKey);
+            }
+
+            OmdbObject j1 = Newtonsoft.Json.JsonConvert.DeserializeObject<OmdbObject>(data);
+            DateTime? omdbInCinemas;
+            DateTime? omdbPhysicalRelease;
+            if (j1.Released != "N/A")
+            {
+                omdbInCinemas = DateTime.Parse(j1.Released);
+            }
+            else
+            {
+                omdbInCinemas = null;
+            }
+
+            if (j1.DVD != "N/A")
+            {
+                omdbPhysicalRelease = DateTime.Parse(j1.DVD);
+            }
+            else
+            {
+                omdbPhysicalRelease = null;
+            }
+
+            if (omdbInCinemas.HasValue && omdbPhysicalRelease.HasValue)
+            {
+                if (omdbPhysicalRelease.Value.Subtract(omdbInCinemas.Value).Duration().TotalSeconds < 60 * 60 * 24 * 15)
+                {
+                    omdbPhysicalRelease = omdbInCinemas;
+                }
+
+                if (omdbInCinemas <= omdbPhysicalRelease)
+                {
+                    return Tuple.Create(omdbInCinemas, omdbPhysicalRelease);
+                }
+            }
+
+            //now we know that we either have partial information or no information
+            if (omdbInCinemas.HasValue && tmdbPhysicalRelease.HasValue)
+            {
+                if (omdbInCinemas <= tmdbPhysicalRelease)
+                {
+                    return Tuple.Create(omdbInCinemas, tmdbPhysicalRelease);
+                }
+            }
+
+            if (omdbPhysicalRelease.HasValue && tmdbInCinemas.HasValue)
+            {
+                if (tmdbInCinemas <= omdbPhysicalRelease)
+                {
+                    return Tuple.Create(tmdbInCinemas, omdbPhysicalRelease);
+                }
+            }
+
+            if ((omdbInCinemas.HasValue && !omdbPhysicalRelease.HasValue) || (!omdbInCinemas.HasValue && omdbPhysicalRelease.HasValue))
+            {
+                return Tuple.Create(omdbInCinemas, omdbPhysicalRelease);
+            }
+            else if ((tmdbInCinemas.HasValue && !tmdbPhysicalRelease.HasValue) || (!tmdbInCinemas.HasValue && tmdbPhysicalRelease.HasValue))
+            {
+                return Tuple.Create(tmdbInCinemas, tmdbPhysicalRelease);
+            }
+
+            if (omdbPhysicalRelease.HasValue)
+            {
+                omdbInCinemas = null;
+                return Tuple.Create(omdbInCinemas, omdbPhysicalRelease);
+            }
+            else if (tmdbPhysicalRelease.HasValue)
+            {
+                tmdbInCinemas = null;
+                return Tuple.Create(tmdbInCinemas, tmdbPhysicalRelease);
+            }
+            else if (omdbInCinemas.HasValue)
+            {
+                omdbPhysicalRelease = null;
+                return Tuple.Create(omdbInCinemas, omdbPhysicalRelease);
+            }
+            else if (tmdbInCinemas.HasValue)
+            {
+                tmdbPhysicalRelease = null;
+                return Tuple.Create(tmdbInCinemas, tmdbPhysicalRelease);
+            }
+
+            omdbInCinemas = null;
+            omdbPhysicalRelease = null;
+            return Tuple.Create(omdbInCinemas, omdbPhysicalRelease);
+        }
+
         private Movie RefreshMovieInfo(int movieId)
         {
             // Get the movie before updating, that way any changes made to the movie after the refresh started,
@@ -92,6 +251,37 @@ namespace NzbDrone.Core.Movies
                 movie.TmdbId = movieInfo.TmdbId;
             }
 
+            if (movieInfo.Year != 0 && _configService.OmdbApiKey.IsNotNullOrWhiteSpace())
+            {
+                Tuple<DateTime?, DateTime?> t = determineReleaseDates(movieInfo.InCinemas, movieInfo.PhysicalRelease, movieInfo.ImdbId);
+                movieInfo.InCinemas = t.Item1;
+                movieInfo.PhysicalRelease = t.Item2;
+            }
+
+            var now = DateTime.Now;
+
+            movieInfo.Status = MovieStatusType.Announced;
+
+            if (movieInfo.InCinemas.HasValue && now > movieInfo.InCinemas)
+            {
+                movieInfo.Status = MovieStatusType.InCinemas;
+
+                if (!movieInfo.PhysicalRelease.HasValue && !movieInfo.DigitalRelease.HasValue && now > movieInfo.InCinemas.Value.AddDays(90))
+                {
+                    movieInfo.Status = MovieStatusType.Released;
+                }
+            }
+
+            if (movieInfo.PhysicalRelease.HasValue && now >= movieInfo.PhysicalRelease)
+            {
+                movieInfo.Status = MovieStatusType.Released;
+            }
+
+            if (movieInfo.DigitalRelease.HasValue && now >= movieInfo.DigitalRelease)
+            {
+                movieInfo.Status = MovieStatusType.Released;
+            }
+
             movie.Title = movieInfo.Title;
             movie.TitleSlug = movieInfo.TitleSlug;
             movie.ImdbId = movieInfo.ImdbId;
@@ -108,7 +298,6 @@ namespace NzbDrone.Core.Movies
             movie.Certification = movieInfo.Certification;
             movie.InCinemas = movieInfo.InCinemas;
             movie.Website = movieInfo.Website;
-
             movie.Year = movieInfo.Year;
             movie.SecondaryYear = movieInfo.SecondaryYear;
             movie.PhysicalRelease = movieInfo.PhysicalRelease;

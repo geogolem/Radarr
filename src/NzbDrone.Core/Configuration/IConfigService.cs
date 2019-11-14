@@ -69,6 +69,7 @@ namespace NzbDrone.Core.Configuration
         TMDbCountryCode CertificationCountry { get; set; }
 
         //UI
+        string OmdbApiKey { get; set; }
         int FirstDayOfWeek { get; set; }
         string CalendarWeekColumnHeader { get; set; }
         MovieRuntimeFormatType MovieRuntimeFormat { get; set; }

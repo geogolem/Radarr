@@ -206,6 +206,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             movie.Genres = resource.Genres;
             movie.Recommendations = resource.Recommendations?.Select(r => r.TmdbId).ToList() ?? new List<int>();
 
+            /* this next code block is moved to RefreshMovieService.cs
             var now = DateTime.Now;
 
             movie.Status = MovieStatusType.Announced;
@@ -229,6 +230,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             {
                 movie.Status = MovieStatusType.Released;
             }
+            end of block moved to RefreshMovieService.cs */
 
             movie.YouTubeTrailerId = resource.YoutubeTrailerId;
             movie.Studio = resource.Studio;

@@ -408,6 +408,13 @@ namespace NzbDrone.Core.Configuration
             set { SetValue("CleanupMetadataImages", value); }
         }
 
+        public string OmdbApiKey
+        {
+            get { return GetValue("OmdbApiKey", string.Empty); }
+
+            set { SetValue("OmdbApiKey", value); }
+        }
+
         public string PlexClientIdentifier => GetValue("PlexClientIdentifier", Guid.NewGuid().ToString(), true);
 
         public string RijndaelPassphrase => GetValue("RijndaelPassphrase", Guid.NewGuid().ToString(), true);

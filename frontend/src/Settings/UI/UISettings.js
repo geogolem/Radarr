@@ -223,6 +223,19 @@ class UISettings extends Component {
                     />
                   </FormGroup>
                 </FieldSet>
+				<FieldSet
+				  legend="Style"
+				>
+				  <FormGroup>
+				    <FormLabel>OMDB Api</FormLabel>
+					<FormInputGroup
+					  type={inputTypes.TEXT}
+					  name="omdbApiKey"
+					  onChange={onInputChange}
+					  {...settings.omdbApiKey}
+					/>
+			      </FormGroup>
+				</FieldSet>
               </Form>
           }
         </PageContentBody>
