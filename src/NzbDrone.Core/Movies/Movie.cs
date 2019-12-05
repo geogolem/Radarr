@@ -87,6 +87,12 @@ namespace NzbDrone.Core.Movies
             }
         }
 
+        public string NetflixUrl { get; set; }
+        public string PrimeVideoUrl { get; set; }
+        public string HooplaUrl { get; set; }
+        public string TubiTVUrl { get; set; }
+        public string JustwatchUrl { get; set; }
+
         public bool HasFile => MovieFileId > 0;
 
         public string FolderName()

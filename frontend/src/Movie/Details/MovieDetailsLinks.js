@@ -10,7 +10,12 @@ function MovieDetailsLinks(props) {
   const {
     tmdbId,
     imdbId,
-    youTubeTrailerId
+    youTubeTrailerId,
+    justwatchUrl,
+	netflixUrl,
+	primeVideoUrl,
+	tubiTVUrl,
+	hooplaUrl
   } = props;
 
   return (
@@ -88,6 +93,86 @@ function MovieDetailsLinks(props) {
             </Label>
           </Link>
       }
+
+      {
+        !!justwatchUrl &&
+          <Link
+            className={styles.link}
+            to={` ${justwatchUrl}`}
+          >
+            <Label
+              className={styles.linkLabel}
+              kind={kinds.INVERSE}
+              size={sizes.LARGE}
+            >
+              Justwatch
+            </Label>
+          </Link>
+      }
+  
+      {
+        !!netflixUrl &&
+          <Link
+            className={styles.link}
+            to={` ${netflixUrl}`}
+          >
+            <Label
+              className={styles.linkLabel}
+              kind={kinds.SUCCESS}
+              size={sizes.LARGE}
+            >
+              Netflix
+            </Label>
+          </Link>
+      }
+
+      {
+        !!primeVideoUrl &&
+          <Link
+            className={styles.link}
+            to={` ${primeVideoUrl}`}
+          >
+            <Label
+              className={styles.linkLabel}
+              kind={kinds.SUCCESS}
+              size={sizes.LARGE}
+            >
+              PrimeVideo
+            </Label>
+          </Link>
+      }
+
+      {
+        !!tubiTVUrl &&
+          <Link
+            className={styles.link}
+            to={` ${tubiTVUrl}`}
+          >
+            <Label
+              className={styles.linkLabel}
+              kind={kinds.SUCCESS}
+              size={sizes.LARGE}
+            >
+              TubiTV
+            </Label>
+          </Link>
+      }
+
+      {
+        !!hooplaUrl &&
+          <Link
+            className={styles.link}
+            to={` ${hooplaUrl}`}
+          >
+            <Label
+              className={styles.linkLabel}
+              kind={kinds.SUCCESS}
+              size={sizes.LARGE}
+            >
+              Hoopla
+            </Label>
+          </Link>
+      }
     </div>
   );
 }
@@ -95,7 +180,12 @@ function MovieDetailsLinks(props) {
 MovieDetailsLinks.propTypes = {
   tmdbId: PropTypes.number.isRequired,
   imdbId: PropTypes.string,
-  youTubeTrailerId: PropTypes.string
+  youTubeTrailerId: PropTypes.string,
+  justwatchUrl: PropTypes.string,
+  netflixUrl: PropTypes.string,
+  primeVideoUrl: PropTypes.string,
+  tubiTVUrl: PropTypes.string,
+  hooplaUrl: PropTypes.string
 };
 
 export default MovieDetailsLinks;

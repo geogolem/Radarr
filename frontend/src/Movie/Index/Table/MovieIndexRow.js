@@ -6,6 +6,8 @@ import IconButton from 'Components/Link/IconButton';
 import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import VirtualTableRowCell from 'Components/Table/Cells/VirtualTableRowCell';
+import JustwatchLinksCell from './JustwatchLinksCell';
+import JustwatchLinksConnector from 'Movie/JustwatchLinksConnector';
 import VirtualTableSelectCell from 'Components/Table/Cells/VirtualTableSelectCell';
 import TagListConnector from 'Components/TagListConnector';
 import Tooltip from 'Components/Tooltip/Tooltip';
@@ -78,6 +80,11 @@ class MovieIndexRow extends Component {
       qualityProfile,
       added,
       year,
+      justwatchUrl,
+      netflixUrl,
+      primeVideoUrl,
+      tubiTVUrl,
+      hooplaUrl,
       inCinemas,
       physicalRelease,
       digitalRelease,
@@ -141,6 +148,20 @@ class MovieIndexRow extends Component {
                   className={styles[name]}
                   monitored={monitored}
                   status={status}
+                  component={VirtualTableRowCell}
+                />
+              );
+            }
+
+            if (name === 'justwatchLinks') {
+              return (
+                <JustwatchLinksCell
+                  justwatchUrl = {justwatchUrl}
+				          netflixUrl = {netflixUrl}
+				          primeVideoUrl = {primeVideoUrl}
+				          tubiTVUrl = {tubiTVUrl}
+				          hooplaUrl = {hooplaUrl}
+                  className={styles[name]}
                   component={VirtualTableRowCell}
                 />
               );
@@ -447,6 +468,11 @@ MovieIndexRow.propTypes = {
   qualityProfile: PropTypes.object.isRequired,
   added: PropTypes.string,
   year: PropTypes.number,
+  justwatchUrl: PropTypes.string,
+  netflixUrl: PropTypes.string,
+  primeVideoUrl: PropTypes.string,
+  tubiTVUrl: PropTypes.string,
+  hooplaUrl: PropTypes.string,
   inCinemas: PropTypes.string,
   physicalRelease: PropTypes.string,
   digitalRelease: PropTypes.string,
