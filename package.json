@@ -72,6 +72,7 @@
     "gulp-wrap": "0.15.0",
     "history": "4.10.1",
     "html-webpack-plugin": "4.5.0",
+    "icomoon-react": "1.0.0",
     "jdu": "1.0.0",
     "jquery": "3.5.1",
     "loader-utils": "^2.0.0",

@@ -166,6 +166,12 @@ export const defaultState = {
       isVisible: true
     },
     {
+      name: 'justwatchLinks',
+      label: 'Justwatch',
+      isSortable: false, 
+      isVisible: false
+    },
+    {
       name: 'ratings',
       label: translate('Ratings'),
       isSortable: true,

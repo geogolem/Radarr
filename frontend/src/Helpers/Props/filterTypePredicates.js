@@ -29,6 +29,10 @@ const filterTypePredicates = {
     return itemValue <= filterValue;
   },
 
+  [filterTypes.HAS_VALUE]: function(itemValue) {
+    return itemValue !== null;
+  },
+
   [filterTypes.NOT_CONTAINS]: function(itemValue, filterValue) {
     if (Array.isArray(itemValue)) {
       return !itemValue.some((v) => v === filterValue);

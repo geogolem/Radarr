@@ -270,6 +270,11 @@ class MovieDetails extends Component {
       overview,
       youTubeTrailerId,
       isAvailable,
+      justwatchUrl,
+      netflixUrl,
+      primeVideoUrl,
+      tubiTVUrl,
+      hooplaUrl,
       images,
       tags,
       isSaving,
@@ -592,6 +597,27 @@ class MovieDetails extends Component {
                     />
                   </div>
                 </Measure>
+
+                <InfoLabel
+                  className={styles.detailsInfoLabel}
+                  title="Links"
+                  size={sizes.LARGE}
+                >
+                  <span className={styles.links}>
+                    {
+                      <MovieDetailsLinks
+                        tmdbId={tmdbId}
+                        imdbId={imdbId}
+                        youTubeTrailerId={youTubeTrailerId}
+                        justwatchUrl={justwatchUrl}
+                        netflixUrl={netflixUrl}
+                        primeVideoUrl={primeVideoUrl}
+                        tubiTVUrl={tubiTVUrl}
+                        hooplaUrl={hooplaUrl}
+                      />
+                    }
+                  </span>
+                </InfoLabel>
               </div>
             </div>
           </div>
@@ -772,6 +798,12 @@ MovieDetails.propTypes = {
   inCinemas: PropTypes.string,
   physicalRelease: PropTypes.string,
   digitalRelease: PropTypes.string,
+  justwatchUrl: PropTypes.string,
+  netflixUrl: PropTypes.string,
+  primeVideoUrl: PropTypes.string,
+  tubiTVUrl: PropTypes.string,
+  hooplaUrl: PropTypes.string,
+  inCinemas: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   alternateTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
