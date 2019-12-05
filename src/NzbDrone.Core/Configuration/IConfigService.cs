@@ -81,6 +81,17 @@ namespace NzbDrone.Core.Configuration
         int MovieInfoLanguage { get; set; }
         int UILanguage { get; set; }
 
+        //Justwatch
+        string JustwatchLocale { get; set; }
+        string EnableNetflix { get; set; }
+        bool IgnoreNetflixTitles { get; set; }
+        string EnablePrimeVideo { get; set; }
+        bool IgnorePrimeVideoTitles { get; set; }
+        string EnableTubiTV { get; set; }
+        bool IgnoreTubiTVTitles { get; set; }
+        string EnableHoopla { get; set; }
+        bool IgnoreHooplaTitles { get; set; }
+
         //Internal
         bool CleanupMetadataImages { get; set; }
         string PlexClientIdentifier { get; }

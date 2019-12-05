@@ -72,6 +72,92 @@ namespace NzbDrone.Core.Movies
             _logger = logger;
         }
 
+        public System.Linq.Expressions.Expression<Func<Movie, bool>> ConstructFilterExpression(string filterKey, string filterValue, string filterType = null)
+        {
+            //if (FilterKey == "all" && FilterValue == "all")
+            //{
+            //    return v => v.Monitored == true || v.Monitored == false;
+            //}
+            if (filterKey == "monitored" && filterValue == "false")
+            {
+                return v => v.Monitored == false;
+            }
+            else if (filterKey == "monitored" && filterValue == "true")
+            {
+                return v => v.Monitored == true;
+            }
+            else if (filterKey == "status")
+            {
+                switch (filterValue)
+                {
+                    case "released":
+                        return v => v.Status == MovieStatusType.Released;
+                    case "inCinemas":
+                        return v => v.Status == MovieStatusType.InCinemas;
+                    case "announced":
+                        return v => v.Status == MovieStatusType.Announced;
+                    case "available":
+                        return v => v.Monitored == true &&
+                             ((v.MinimumAvailability == MovieStatusType.Released && v.Status >= MovieStatusType.Released) ||
+                             (v.MinimumAvailability == MovieStatusType.InCinemas && v.Status >= MovieStatusType.InCinemas) ||
+                             (v.MinimumAvailability == MovieStatusType.Announced && v.Status >= MovieStatusType.Announced) ||
+                             ((v.MinimumAvailability == MovieStatusType.PreDB && v.Status >= MovieStatusType.Released) || v.HasPreDBEntry == true));
+                }
+            }
+            else if (filterKey == "netflixUrl")
+            {
+                if (filterType == "hasValue")
+                {
+                    return v => v.NetflixUrl != null;
+                }
+            }
+            else if (filterKey == "primeVideoUrl")
+            {
+                if (filterType == "hasValue")
+                {
+                    return v => v.PrimeVideoUrl != null;
+                }
+            }
+            else if (filterKey == "hooplaUrl")
+            {
+                if (filterType == "hasValue")
+                {
+                    return v => v.HooplaUrl != null;
+                }
+            }
+            else if (filterKey == "tubiUrl")
+            {
+                if (filterType == "hasValue")
+                {
+                    return v => v.TubiTVUrl != null;
+                }
+            }
+            else if (filterKey == "downloaded")
+            {
+                return v => v.MovieFileId == 0;
+            }
+            else if (filterKey == "title")
+            {
+                if (filterValue == string.Empty || filterValue == null)
+                {
+                    return v => true;
+                }
+                else
+                {
+                    if (filterType == "contains")
+                    {
+                        return v => v.CleanTitle.Contains(filterValue);
+                    }
+                    else
+                    {
+                        return v => v.CleanTitle == filterValue;
+                    }
+                }
+            }
+
+            return v => true;
+        }
+
         public Movie GetMovie(int movieId)
         {
             return _movieRepository.Get(movieId);

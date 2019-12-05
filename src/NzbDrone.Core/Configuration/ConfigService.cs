@@ -400,6 +400,69 @@ namespace NzbDrone.Core.Configuration
 
             set { SetValue("UILanguage", value); }
         }
+        
+        public string JustwatchLocale
+        {
+            get { return GetValue("JustwatchLocale", "en_CA"); }
+
+            set { SetValue("JustwatchLocale", value); }
+        }
+
+        public string EnableNetflix
+        {
+            get { return GetValue("enableNetflix", "disabled"); }
+
+            set { SetValue("EnableNetflix", value); }
+        }
+
+        public bool IgnoreNetflixTitles
+        {
+            get { return GetValueBoolean("IgnoreNetflixTitles", false); }
+
+            set { SetValue("IgnoreNetflixTitles", value); }
+        }
+
+        public string EnablePrimeVideo
+        {
+            get { return GetValue("enablePrimeVideo", "disabled"); }
+
+            set { SetValue("EnablePrimeVideo", value); }
+        }
+
+        public bool IgnorePrimeVideoTitles
+        {
+            get { return GetValueBoolean("IgnorePrimeVideoTitles", false); }
+
+            set { SetValue("IgnorePrimeVideoTitles", value); }
+        }
+
+        public string EnableTubiTV
+        {
+            get { return GetValue("enableTubiTV", "disabled"); }
+
+            set { SetValue("EnableTubiTV", value); }
+        }
+
+        public bool IgnoreTubiTVTitles
+        {
+            get { return GetValueBoolean("IgnoreTubiTVTitles", false); }
+
+            set { SetValue("IgnoreTubiTVTitles", value); }
+        }
+
+        public string EnableHoopla
+        {
+            get { return GetValue("enableHoopla", "disabled"); }
+
+            set { SetValue("EnableHoopla", value); }
+        }
+
+        public bool IgnoreHooplaTitles
+        {
+            get { return GetValueBoolean("IgnoreHooplaTitles", false); }
+
+            set { SetValue("IgnoreHooplaTitles", value); }
+        }
 
         public bool CleanupMetadataImages
         {
