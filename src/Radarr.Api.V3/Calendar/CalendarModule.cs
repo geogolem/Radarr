@@ -74,7 +74,7 @@ namespace Radarr.Api.V3.Calendar
 
             var translations = _movieTranslationService.GetAllTranslationsForMovie(movie.Id);
             var translation = GetMovieTranslation(translations, movie);
-            var resource = movie.ToResource(_qualityUpgradableSpecification, translation);
+            var resource = movie.ToResource(_qualityUpgradableSpecification, translation, _configService);
 
             return resource;
         }
