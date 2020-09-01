@@ -137,26 +137,26 @@ class MovieIndexFooter extends PureComponent {
           </DescriptionList>
 
           <DescriptionList>
-		        <DescriptionListItem
-			        title="Netflix"
-			        data={netflix}
-			      />
+            <DescriptionListItem
+              title="Netflix"
+              data={netflix}
+            />
 
-			      <DescriptionListItem
-			        title="PrimeVideo"
-			        data={primeVideo}
-			      />
-			      
             <DescriptionListItem
-			        title="TubiTV"
-			        data={tubiTV}
-	          />
-			  
+              title="PrimeVideo"
+              data={primeVideo}
+            />
+
             <DescriptionListItem
-			        title="Hoopla"
-			        data={hoopla}
-			      />
-			    </DescriptionList>
+              title="TubiTV"
+              data={tubiTV}
+            />
+
+            <DescriptionListItem
+              title="Hoopla"
+              data={hoopla}
+            />
+          </DescriptionList>
         </div>
       </div>
     );

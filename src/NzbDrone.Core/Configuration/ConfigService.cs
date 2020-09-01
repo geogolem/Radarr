@@ -400,7 +400,7 @@ namespace NzbDrone.Core.Configuration
 
             set { SetValue("UILanguage", value); }
         }
-        
+
         public string JustwatchLocale
         {
             get { return GetValue("JustwatchLocale", "en_CA"); }

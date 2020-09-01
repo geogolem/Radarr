@@ -804,7 +804,6 @@ MovieDetails.propTypes = {
   primeVideoUrl: PropTypes.string,
   tubiTVUrl: PropTypes.string,
   hooplaUrl: PropTypes.string,
-  inCinemas: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   alternateTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
