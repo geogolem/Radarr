@@ -17,6 +17,7 @@ import DownloadClientSettingsConnector from 'Settings/DownloadClients/DownloadCl
 import GeneralSettingsConnector from 'Settings/General/GeneralSettingsConnector';
 import ImportListSettingsConnector from 'Settings/ImportLists/ImportListSettingsConnector';
 import IndexerSettingsConnector from 'Settings/Indexers/IndexerSettingsConnector';
+import JustwatchSettingsConnector from 'Settings/Justwatch/JustwatchSettingsConnector';
 import MediaManagementConnector from 'Settings/MediaManagement/MediaManagementConnector';
 import MetadataSettings from 'Settings/Metadata/MetadataSettings';
 import NotificationSettings from 'Settings/Notifications/NotificationSettings';
@@ -25,7 +26,6 @@ import Quality from 'Settings/Quality/Quality';
 import Settings from 'Settings/Settings';
 import TagSettings from 'Settings/Tags/TagSettings';
 import UISettingsConnector from 'Settings/UI/UISettingsConnector';
-import JustwatchSettingsConnector from 'Settings/Justwatch/JustwatchSettingsConnector';
 import BackupsConnector from 'System/Backup/BackupsConnector';
 import LogsTableConnector from 'System/Events/LogsTableConnector';
 import Logs from 'System/Logs/Logs';
@@ -187,10 +187,10 @@ function AppRoutes(props) {
       />
 
       <Route
-	      path="/settings/justwatch"
-		    component={JustwatchSettingsConnector}
-	    />
-         
+        path="/settings/justwatch"
+        component={JustwatchSettingsConnector}
+      />
+
       {/*
         System
       */}

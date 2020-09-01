@@ -13,6 +13,7 @@ import importLists from './Settings/importLists';
 import indexerFlags from './Settings/indexerFlags';
 import indexerOptions from './Settings/indexerOptions';
 import indexers from './Settings/indexers';
+import justwatch from './Settings/justwatch';
 import languages from './Settings/languages';
 import mediaManagement from './Settings/mediaManagement';
 import metadata from './Settings/metadata';
@@ -25,7 +26,6 @@ import qualityProfiles from './Settings/qualityProfiles';
 import remotePathMappings from './Settings/remotePathMappings';
 import restrictions from './Settings/restrictions';
 import ui from './Settings/ui';
-import justwatch from './Settings/justwatch';
 
 export * from './Settings/customFormatSpecifications.js';
 export * from './Settings/customFormats';

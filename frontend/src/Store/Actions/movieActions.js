@@ -64,46 +64,6 @@ export const filters = [
     ]
   },
   {
-    key: 'onNetflix',
-	  label: ' On Netflix',
-	  filters: [
-	    {
-	      key: 'netflixUrl',
-	      type: filterTypes.HAS_VALUE
-      }
-    ]
-  },
-  {
-    key: 'onPrimeVideo',
-	  label: 'On PrimeVideo',
-	  filters: [
-	    {
-	      key: 'primeVideoUrl',
-	      type: filterTypes.HAS_VALUE
-      }
-    ]
-  },
-  {
-    key: 'onTubiTV',
-	  label: 'On TubiTV',
-	  filters: [
-	    {
-	      key: 'tubiTVUrl',
-	      type: filterTypes.HAS_VALUE
-      }
-    ]
-  },
-  {
-    key: 'onHoopla',
-	  label: 'On Hoopla',
-	  filters: [
-	    {
-	      key: 'hooplaUrl',
-	      type: filterTypes.HAS_VALUE
-      }
-    ]
-  },
-  {
     key: 'wanted',
     label: translate('Wanted'),
     filters: [
@@ -169,6 +129,30 @@ export const filterPredicates = {
 
   digitalRelease: function(item, filterValue, type) {
     return dateFilterPredicate(item.digitalRelease, filterValue, type);
+  },
+
+  netflixUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.netflixUrl, filterValue, type);
+  },
+
+  primeVideoUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.primeVideoUrl, filterValue, type);
+  },
+
+  tubiTVUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.tubiTVUrl, filterValue, type);
+  },
+
+  hooplaUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.hooplaUrl, filterValue, type);
   },
 
   ratings: function(item, filterValue, type) {
