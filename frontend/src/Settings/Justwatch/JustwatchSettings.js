@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { inputTypes } from 'Helpers/Props';
-import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
-import PageContent from 'Components/Page/PageContent';
-import PageContentBody from 'Components/Page/PageContentBody';
-import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
-import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
+import FormLabel from 'Components/Form/FormLabel';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
+import PageContent from 'Components/Page/PageContent';
+import PageContentBody from 'Components/Page/PageContentBody';
+import { inputTypes } from 'Helpers/Props';
+import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
 
 export const justwatchLocaleOptions = [
   { key: 'en_CA', value: 'Canada' },
@@ -35,7 +35,7 @@ export const supportLevelOptions = [
 
 export const ignoreOptions = [
   { key: 'disabled', value: 'Disabled' },
-  { key: 'enabled', value: 'Enabled'}
+  { key: 'enabled', value: 'Enabled' }
 ];
 
 class JustwatchSettings extends Component {
@@ -62,22 +62,22 @@ class JustwatchSettings extends Component {
         />
 
         <PageContentBody>
-		{
-		  isFetching &&
-		    <LoadingIndicator />
-		}
+          {
+            isFetching &&
+              <LoadingIndicator />
+          }
 
-        {
-          !isFetching && error &&
-            <div>Unable to load Justwatch settings</div>
-        }
+          {
+            !isFetching && error &&
+              <div>Unable to load Justwatch settings</div>
+          }
 
-        {
-          hasSettings && !error && !isFetching && 
-            <Form
-              id="justwatchSettings"
-              {...otherProps}
-            >
+          {
+            hasSettings && !error && !isFetching &&
+              <Form
+                id="justwatchSettings"
+                {...otherProps}
+              >
                 <FieldSet legend="General">
                   <FormGroup>
                     <FormLabel>Locale</FormLabel>
@@ -91,7 +91,7 @@ class JustwatchSettings extends Component {
                     />
                   </FormGroup>
                 </FieldSet>
-	        <FieldSet legend="Netflix Options">
+                <FieldSet legend="Netflix Options">
                   <FormGroup>
                     <FormLabel>Support Level</FormLabel>
                     <FormInputGroup
@@ -102,19 +102,19 @@ class JustwatchSettings extends Component {
                       helpText="If/how Netflix data is obtained and set (on refresh)"
                       {...settings.enableNetflix}
                     />
-		  </FormGroup>
-		  <FormGroup>
-		    <FormLabel>Ignore Titles</FormLabel>
-		    <FormInputGroup
-		      type={inputTypes.CHECK}
-		      name="ignoreNetflixTitles"
-		      helpText="Unmonitor titles if they are on Netflix (on refresh)"
-		      onChange={onInputChange}
-		      {...settings.ignoreNetflixTitles}
-		     />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>Ignore Titles</FormLabel>
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="ignoreNetflixTitles"
+                      helpText="Unmonitor titles if they are on Netflix (on refresh)"
+                      onChange={onInputChange}
+                      {...settings.ignoreNetflixTitles}
+                    />
                   </FormGroup>
                 </FieldSet>
-	        <FieldSet legend="Amazon Prime Video Options">
+                <FieldSet legend="Amazon Prime Video Options">
                   <FormGroup>
                     <FormLabel>Support Level</FormLabel>
                     <FormInputGroup
@@ -125,20 +125,20 @@ class JustwatchSettings extends Component {
                       helpText="If/how Amazon Prime Video data is obtained and set (on refresh)"
                       {...settings.enablePrimeVideo}
                     />
-		  </FormGroup>
-		  <FormGroup>
-		    <FormLabel>Ignore Titles</FormLabel>
-		    <FormInputGroup
-		      type={inputTypes.CHECK}
-		      name="ignorePrimeVideoTitles"
-		      helpText="Unmonitor titles if they are on Amazon Prime Video(on refresh)"
-		      onChange={onInputChange}
-		      {...settings.ignorePrimeVideoTitles}
-		     />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>Ignore Titles</FormLabel>
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="ignorePrimeVideoTitles"
+                      helpText="Unmonitor titles if they are on Amazon Prime Video(on refresh)"
+                      onChange={onInputChange}
+                      {...settings.ignorePrimeVideoTitles}
+                    />
                   </FormGroup>
 
                 </FieldSet>
-	        <FieldSet legend="TubiTV Options">
+                <FieldSet legend="TubiTV Options">
                   <FormGroup>
                     <FormLabel>Support Level</FormLabel>
                     <FormInputGroup
@@ -149,20 +149,20 @@ class JustwatchSettings extends Component {
                       helpText="If/how TubiTV data is obtained and set (on refresh)"
                       {...settings.enableTubiTV}
                     />
-		  </FormGroup>
-		  <FormGroup>
-		    <FormLabel>Ignore Titles</FormLabel>
-		    <FormInputGroup
-		      type={inputTypes.CHECK}
-		      name="ignoreTubiTVTitles"
-		      helpText="Unmonitor titles if they are on TubiTV(on refresh)"
-		      onChange={onInputChange}
-		      {...settings.ignoreTubiTVTitles}
-		     />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>Ignore Titles</FormLabel>
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="ignoreTubiTVTitles"
+                      helpText="Unmonitor titles if they are on TubiTV(on refresh)"
+                      onChange={onInputChange}
+                      {...settings.ignoreTubiTVTitles}
+                    />
                   </FormGroup>
 
                 </FieldSet>
-	        <FieldSet legend="Hoopla Options">
+                <FieldSet legend="Hoopla Options">
                   <FormGroup>
                     <FormLabel>Support Level</FormLabel>
                     <FormInputGroup
@@ -173,22 +173,21 @@ class JustwatchSettings extends Component {
                       helpText="If/how Hoopla data is obtained and set (on refresh)"
                       {...settings.enableHoopla}
                     />
-		  </FormGroup>
-		  <FormGroup>
-		    <FormLabel>Ignore Titles</FormLabel>
-		    <FormInputGroup
-		      type={inputTypes.CHECK}
-		      name="ignoreHooplaTitles"
-		      helpText="Unmonitor titles if they are on Hoopla(on refresh)"
-		      onChange={onInputChange}
-		      {...settings.ignoreHooplaTitles}
-		     />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>Ignore Titles</FormLabel>
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="ignoreHooplaTitles"
+                      helpText="Unmonitor titles if they are on Hoopla(on refresh)"
+                      onChange={onInputChange}
+                      {...settings.ignoreHooplaTitles}
+                    />
                   </FormGroup>
                 </FieldSet>
 
-
               </Form>
-	    }
+          }
         </PageContentBody>
       </PageContent>
     );

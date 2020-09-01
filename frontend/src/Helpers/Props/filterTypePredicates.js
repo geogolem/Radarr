@@ -29,8 +29,11 @@ const filterTypePredicates = {
     return itemValue <= filterValue;
   },
 
-  [filterTypes.HAS_VALUE]: function(itemValue) {
-    return itemValue !== null;
+  [filterTypes.HAS_VALUE]: function(itemValue, filterValue) {
+    if (filterValue) {
+      return !(itemValue == null);
+    }
+    return itemValue == null;
   },
 
   [filterTypes.NOT_CONTAINS]: function(itemValue, filterValue) {

@@ -6,8 +6,6 @@ import IconButton from 'Components/Link/IconButton';
 import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import VirtualTableRowCell from 'Components/Table/Cells/VirtualTableRowCell';
-import JustwatchLinksCell from './JustwatchLinksCell';
-import JustwatchLinksConnector from 'Movie/JustwatchLinksConnector';
 import VirtualTableSelectCell from 'Components/Table/Cells/VirtualTableSelectCell';
 import TagListConnector from 'Components/TagListConnector';
 import Tooltip from 'Components/Tooltip/Tooltip';
@@ -21,6 +19,7 @@ import formatRuntime from 'Utilities/Date/formatRuntime';
 import formatBytes from 'Utilities/Number/formatBytes';
 import titleCase from 'Utilities/String/titleCase';
 import translate from 'Utilities/String/translate';
+import JustwatchLinksCell from './JustwatchLinksCell';
 import MovieStatusCell from './MovieStatusCell';
 import styles from './MovieIndexRow.css';
 
@@ -156,11 +155,11 @@ class MovieIndexRow extends Component {
             if (name === 'justwatchLinks') {
               return (
                 <JustwatchLinksCell
-                  justwatchUrl = {justwatchUrl}
-				          netflixUrl = {netflixUrl}
-				          primeVideoUrl = {primeVideoUrl}
-				          tubiTVUrl = {tubiTVUrl}
-				          hooplaUrl = {hooplaUrl}
+                  justwatchUrl={justwatchUrl}
+                  netflixUrl={netflixUrl}
+                  primeVideoUrl={primeVideoUrl}
+                  tubiTVUrl={tubiTVUrl}
+                  hooplaUrl={hooplaUrl}
                   className={styles[name]}
                   component={VirtualTableRowCell}
                 />

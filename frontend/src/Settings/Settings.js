@@ -147,14 +147,14 @@ function Settings() {
         </div>
 
         <Link
-		      className={styles.link}
-	        to="/settings/justwatch"
-	      >
-	        Justwatch 
-	      </Link>
+          className={styles.link}
+          to="/settings/justwatch"
+        >
+          Justwatch
+        </Link>
 
         <div className={styles.summary}>
-          Justwatch Support (Netflix, Prime etc.) 
+          Justwatch Support (Netflix, Prime etc.)
         </div>
       </PageContentBody>
     </PageContent>
