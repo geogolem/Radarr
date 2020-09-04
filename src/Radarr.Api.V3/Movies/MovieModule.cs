@@ -271,7 +271,7 @@ namespace Radarr.Api.V3.Movies
 
         public void Handle(MovieFileDeletedEvent message)
         {
-            if (message.Reason == DeleteMediaFileReason.Upgrade)
+            if (message.Reason == DeleteMediaFileReason.Upgrade || message.Reason == DeleteMediaFileReason.MovieDeletion)
             {
                 return;
             }
