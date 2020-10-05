@@ -139,7 +139,7 @@ namespace NzbDrone.Core.Movies
             }
             else if (filterKey == "title")
             {
-                if (filterValue == string.Empty || filterValue == null)
+                if (string.IsNullOrEmpty(filterValue))
                 {
                     return v => true;
                 }
