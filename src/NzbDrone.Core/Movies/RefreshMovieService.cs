@@ -303,7 +303,7 @@ namespace NzbDrone.Core.Movies
                                                 movieInfo.NetflixUrl = rsponseObject.items[i].offers[k].urls.standard_web;
                                             }
 
-                                            if (enablePrimeVideo == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("https://www.primevideo.com/detail/"))
+                                            if (enablePrimeVideo == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("primevideo.com/detail"))
                                             {
                                                 movieInfo.PrimeVideoUrl = rsponseObject.items[i].offers[k].urls.standard_web;
                                             }
