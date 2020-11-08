@@ -25,14 +25,14 @@ namespace NzbDrone.Core.Movies
     public class JustWatchPayload
     {
         public string age_certifications { get; set; }
-        public string content_types { get; set; }
-        public string presentation_types { get; set; }
-        public string providers { get; set; }
-        public string genres { get; set; }
+        public List<string> content_types { get; set; }
+        public List<string> presentation_types { get; set; }
+        public List<string> providers { get; set; }
+        public List<string> genres { get; set; }
         public string languages { get; set; }
         public int release_year_from { get; set; }
         public int release_year_until { get; set; }
-        public string monetization_types { get; set; }
+        public List<string> monetization_types { get; set; }
         public string min_price { get; set; }
         public string max_price { get; set; }
         public string nationwide_cinema_releases_only { get; set; }
@@ -251,14 +251,18 @@ namespace NzbDrone.Core.Movies
 
                     var payload = new JustWatchPayload();
                     payload.age_certifications = null;
-                    payload.content_types = null;
+                    payload.content_types = new List<string>();
+                    payload.content_types.Add("movie");
                     payload.presentation_types = null;
                     payload.providers = null;
                     payload.genres = null;
                     payload.languages = null;
                     payload.release_year_from = movieInfo.Year - 1;
                     payload.release_year_until = movieInfo.Year + 1;
-                    payload.monetization_types = null;
+                    payload.monetization_types = null; // new List<string>();
+
+                    //payload.monetization_types.Add("flatrate");
+                    //payload.monetization_types.Add("ads");
                     payload.min_price = null;
                     payload.max_price = null;
                     payload.nationwide_cinema_releases_only = null;
@@ -300,7 +304,7 @@ namespace NzbDrone.Core.Movies
                                         {
                                             if (rsponseObject.items[i].offers[k].monetization_type == "flatrate")
                                             {
-                                                if (enableNetflix == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("http://www.netflix.com/title/"))
+                                                if (enableNetflix == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("netflix.com/title"))
                                                 {
                                                     movieInfo.NetflixUrl = rsponseObject.items[i].offers[k].urls.standard_web;
                                                 }
@@ -310,12 +314,15 @@ namespace NzbDrone.Core.Movies
                                                     movieInfo.PrimeVideoUrl = rsponseObject.items[i].offers[k].urls.standard_web;
                                                 }
 
-                                                if (enableHoopla == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("https://www.hoopladigital.com/title/"))
+                                                if (enableHoopla == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("hoopladigital.com/title"))
                                                 {
                                                     movieInfo.HooplaUrl = rsponseObject.items[i].offers[k].urls.standard_web;
                                                 }
+                                            }
 
-                                                if (enableTubiTV == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("https://tubitv.com/movies/"))
+                                            if (rsponseObject.items[i].offers[k].monetization_type == "ads")
+                                            {
+                                                if (enableTubiTV == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("tubitv.com/movies"))
                                                 {
                                                     movieInfo.TubiTVUrl = rsponseObject.items[i].offers[k].urls.standard_web;
                                                 }
