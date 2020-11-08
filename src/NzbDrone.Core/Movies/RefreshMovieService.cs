@@ -242,7 +242,8 @@ namespace NzbDrone.Core.Movies
             {
                 string api_url = "https://apis.justwatch.com/content/titles/" + locale + "/popular";
                 var title = movieInfo.Title;
-                for (int alternativeTitlesIndex = -1; alternativeTitlesIndex < movieInfo.AlternativeTitles.Count; alternativeTitlesIndex++)
+                bool tmdbIdMatched = false;
+                for (int alternativeTitlesIndex = -1; !tmdbIdMatched && (alternativeTitlesIndex < movieInfo.AlternativeTitles.Count); alternativeTitlesIndex++)
                 {
                     if (alternativeTitlesIndex >= 0)
                     {
@@ -289,14 +290,15 @@ namespace NzbDrone.Core.Movies
 
                     RootObject rsponseObject = JsonConvert.DeserializeObject<RootObject>(rsponseString);
 
-                    for (int i = 0; (rsponseObject != null) && (rsponseObject.items != null) && (i < rsponseObject.items.Count); i++)
+                    for (int i = 0; (rsponseObject != null) && (rsponseObject.items != null) && (i < rsponseObject.items.Count) && !tmdbIdMatched; i++)
                     {
-                        for (int j = 0; (rsponseObject.items[i].scoring != null) && (j < rsponseObject.items[i].scoring.Count); j++)
+                        for (int j = 0; (rsponseObject.items[i].scoring != null) && (j < rsponseObject.items[i].scoring.Count) && !tmdbIdMatched; j++)
                         {
                             if (rsponseObject.items[i].scoring[j].provider_type == "tmdb:id")
                             {
                                 if (rsponseObject.items[i].scoring[j].value == movieInfo.TmdbId)
                                 {
+                                    tmdbIdMatched = true;
                                     movieInfo.JustwatchUrl = "https://www.justwatch.com" + rsponseObject.items[i].full_path;
                                     if (enableNetflix == "enabled" || enablePrimeVideo == "enabled" || enableHoopla == "enabled" || enableTubiTV == "enabled")
                                     {
