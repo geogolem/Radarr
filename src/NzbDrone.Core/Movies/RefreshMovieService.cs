@@ -298,24 +298,27 @@ namespace NzbDrone.Core.Movies
                                     {
                                         for (int k = 0; (rsponseObject.items[i].offers != null) && (k < rsponseObject.items[i].offers.Count); k++)
                                         {
-                                            if (enableNetflix == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("http://www.netflix.com/title/"))
+                                            if (rsponseObject.items[i].offers[k].monetization_type == "flatrate")
                                             {
-                                                movieInfo.NetflixUrl = rsponseObject.items[i].offers[k].urls.standard_web;
-                                            }
+                                                if (enableNetflix == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("http://www.netflix.com/title/"))
+                                                {
+                                                    movieInfo.NetflixUrl = rsponseObject.items[i].offers[k].urls.standard_web;
+                                                }
 
-                                            if (enablePrimeVideo == "enabled" && rsponseObject.items[i].offers[k].monetization_type == "flatrate" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("primevideo.com/detail"))
-                                            {
-                                                movieInfo.PrimeVideoUrl = rsponseObject.items[i].offers[k].urls.standard_web;
-                                            }
+                                                if (enablePrimeVideo == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("primevideo.com/detail"))
+                                                {
+                                                    movieInfo.PrimeVideoUrl = rsponseObject.items[i].offers[k].urls.standard_web;
+                                                }
 
-                                            if (enableHoopla == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("https://www.hoopladigital.com/title/"))
-                                            {
-                                                movieInfo.HooplaUrl = rsponseObject.items[i].offers[k].urls.standard_web;
-                                            }
+                                                if (enableHoopla == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("https://www.hoopladigital.com/title/"))
+                                                {
+                                                    movieInfo.HooplaUrl = rsponseObject.items[i].offers[k].urls.standard_web;
+                                                }
 
-                                            if (enableTubiTV == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("https://tubitv.com/movies/"))
-                                            {
-                                                movieInfo.TubiTVUrl = rsponseObject.items[i].offers[k].urls.standard_web;
+                                                if (enableTubiTV == "enabled" && rsponseObject.items[i].offers[k].urls.standard_web.Contains("https://tubitv.com/movies/"))
+                                                {
+                                                    movieInfo.TubiTVUrl = rsponseObject.items[i].offers[k].urls.standard_web;
+                                                }
                                             }
                                         }
                                     }
