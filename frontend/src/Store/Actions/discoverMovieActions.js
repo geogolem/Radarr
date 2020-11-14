@@ -362,6 +362,12 @@ export const defaultState = {
       label: 'Recommended',
       type: filterBuilderTypes.EXACT,
       valueType: filterBuilderValueTypes.BOOL
+    },
+    {
+      name: 'queueStatusText',
+      label: 'Queue Status',
+      type: filterBuilderTypes.EXACT,
+      valueType: filterBuilderValueTypes.QUEUE_STATUS_TEXT
     }
   ]
 };

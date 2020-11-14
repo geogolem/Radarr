@@ -13,6 +13,8 @@ import createHandleActions from './Creators/createHandleActions';
 import createRemoveItemHandler from './Creators/createRemoveItemHandler';
 import createSaveProviderHandler from './Creators/createSaveProviderHandler';
 import createSetSettingValueReducer from './Creators/Reducers/createSetSettingValueReducer';
+import getQueueStatusText from 'Utilities/Movie/getQueueStatusText';
+
 
 //
 // Variables
@@ -141,6 +143,14 @@ export const filterPredicates = {
     const { movieFile = {} } = item;
 
     return movieFile.qualityCutoffNotMet;
+  },
+  
+  queueStatusText: function(item, filterValue, type) {
+    //need to get queueItems in here somehow..
+    const firstQueueItem = queueItems.find((q) => q.movieId === item.id);
+    queueStatus =  firstQueueItem ? firstQueueItem.status : null,
+    queueState =  firstQueueItem ? firstQueueItem.trackedDownloadState : null
+    return getQueueStatusText(queueStatus, queueState) === filterValue;;
   }
 };
 

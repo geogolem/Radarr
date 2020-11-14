@@ -385,6 +385,12 @@ export const defaultState = {
       label: translate('Tags'),
       type: filterBuilderTypes.ARRAY,
       valueType: filterBuilderValueTypes.TAG
+    },
+    {
+      name: 'queueStatusText',
+      label: 'Queue Status',
+      type: filterBuilderTypes.EXACT,
+      valueType: filterBuilderValueTypes.QUEUE_STATUS_TEXT
     }
   ]
 };

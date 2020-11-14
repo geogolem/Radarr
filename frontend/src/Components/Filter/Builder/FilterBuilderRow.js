@@ -13,6 +13,7 @@ import ProtocolFilterBuilderRowValue from './ProtocolFilterBuilderRowValue';
 import QualityFilterBuilderRowValueConnector from './QualityFilterBuilderRowValueConnector';
 import QualityProfileFilterBuilderRowValueConnector from './QualityProfileFilterBuilderRowValueConnector';
 import ReleaseStatusFilterBuilderRowValue from './ReleaseStatusFilterBuilderRowValue';
+import QueueStatusTextFilterBuilderRowValue from './QueueStatusTextFilterBuilderRowValue';
 import TagFilterBuilderRowValueConnector from './TagFilterBuilderRowValueConnector';
 import styles from './FilterBuilderRow.css';
 
@@ -72,6 +73,9 @@ function getRowValueConnector(selectedFilterBuilderProp) {
 
     case filterBuilderValueTypes.RELEASE_STATUS:
       return ReleaseStatusFilterBuilderRowValue;
+
+    case filterBuilderValueTypes.QUEUE_STATUS_TEXT:
+      return QueueStatusTextFilterBuilderRowValue;
 
     case filterBuilderValueTypes.MINIMUM_AVAILABILITY:
       return MinimumAvailabilityFilterBuilderRowValue;

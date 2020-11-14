@@ -8,5 +8,6 @@ export const QUALITY = 'quality';
 export const QUALITY_PROFILE = 'qualityProfile';
 export const RELEASE_STATUS = 'releaseStatus';
 export const MINIMUM_AVAILABILITY = 'minimumAvailability';
+export const QUEUE_STATUS_TEXT = 'queueStatusText';
 export const TAG = 'tag';
 export const IMPORTLIST = 'importList';
