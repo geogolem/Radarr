@@ -12,6 +12,7 @@ export const NOT_CONTAINS = 'notContains';
 export const NOT_EQUAL = 'notEqual';
 export const IN_FUTURE = 'inFuture';
 export const IN_PAST = 'inPast';
+export const HAS_VALUE = 'hasValue';
 
 export const all = [
   CONTAINS,
@@ -27,5 +28,6 @@ export const all = [
   IN_NEXT,
   NOT_IN_NEXT,
   IN_FUTURE,
-  IN_PAST
+  IN_PAST,
+  HAS_VALUE
 ];

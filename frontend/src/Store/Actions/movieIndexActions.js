@@ -164,6 +164,12 @@ export const defaultState = {
       isVisible: true
     },
     {
+      name: 'justwatchLinks',
+      label: 'Justwatch',
+      isSortable: false,
+      isVisible: false
+    },
+    {
       name: 'ratings',
       label: translate('Ratings'),
       isSortable: true,
@@ -330,6 +336,30 @@ export const defaultState = {
       label: translate('DigitalRelease'),
       type: filterBuilderTypes.DATE,
       valueType: filterBuilderValueTypes.DATE
+    },
+    {
+      name: 'netflixUrl',
+      label: translate('NetflixUrl'),
+      type: filterBuilderTypes.STRING,
+      valueType: filterBuilderValueTypes.BOOL
+    },
+    {
+      name: 'primeVideoUrl',
+      label: translate('PrimeVideoUrl'),
+      type: filterBuilderTypes.STRING,
+      valueType: filterBuilderValueTypes.BOOL
+    },
+    {
+      name: 'tubiTVUrl',
+      label: translate('TubiTVUrl'),
+      type: filterBuilderTypes.STRING,
+      valueType: filterBuilderValueTypes.BOOL
+    },
+    {
+      name: 'hooplaUrl',
+      label: translate('HooplaUrl'),
+      type: filterBuilderTypes.STRING,
+      valueType: filterBuilderValueTypes.BOOL
     },
     {
       name: 'runtime',

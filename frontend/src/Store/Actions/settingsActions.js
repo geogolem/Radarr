@@ -13,6 +13,7 @@ import importLists from './Settings/importLists';
 import indexerFlags from './Settings/indexerFlags';
 import indexerOptions from './Settings/indexerOptions';
 import indexers from './Settings/indexers';
+import justwatch from './Settings/justwatch';
 import languages from './Settings/languages';
 import mediaManagement from './Settings/mediaManagement';
 import metadata from './Settings/metadata';
@@ -50,6 +51,7 @@ export * from './Settings/qualityProfiles';
 export * from './Settings/remotePathMappings';
 export * from './Settings/restrictions';
 export * from './Settings/ui';
+export * from './Settings/justwatch';
 
 //
 // Variables
@@ -85,7 +87,8 @@ export const defaultState = {
   qualityProfiles: qualityProfiles.defaultState,
   remotePathMappings: remotePathMappings.defaultState,
   restrictions: restrictions.defaultState,
-  ui: ui.defaultState
+  ui: ui.defaultState,
+  justwatch: justwatch.defaultState
 };
 
 export const persistState = [
@@ -129,7 +132,8 @@ export const actionHandlers = handleThunks({
   ...qualityProfiles.actionHandlers,
   ...remotePathMappings.actionHandlers,
   ...restrictions.actionHandlers,
-  ...ui.actionHandlers
+  ...ui.actionHandlers,
+  ...justwatch.actionHandlers
 });
 
 //
@@ -164,6 +168,7 @@ export const reducers = createHandleActions({
   ...qualityProfiles.reducers,
   ...remotePathMappings.reducers,
   ...restrictions.reducers,
-  ...ui.reducers
+  ...ui.reducers,
+  ...justwatch.reducers
 
 }, defaultState, section);
