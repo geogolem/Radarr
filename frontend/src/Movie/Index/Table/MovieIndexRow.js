@@ -19,6 +19,7 @@ import formatRuntime from 'Utilities/Date/formatRuntime';
 import formatBytes from 'Utilities/Number/formatBytes';
 import titleCase from 'Utilities/String/titleCase';
 import translate from 'Utilities/String/translate';
+import JustwatchLinksCell from './JustwatchLinksCell';
 import MovieStatusCell from './MovieStatusCell';
 import styles from './MovieIndexRow.css';
 
@@ -78,6 +79,11 @@ class MovieIndexRow extends Component {
       qualityProfile,
       added,
       year,
+      justwatchUrl,
+      netflixUrl,
+      primeVideoUrl,
+      tubiTVUrl,
+      hooplaUrl,
       inCinemas,
       physicalRelease,
       digitalRelease,
@@ -141,6 +147,20 @@ class MovieIndexRow extends Component {
                   className={styles[name]}
                   monitored={monitored}
                   status={status}
+                  component={VirtualTableRowCell}
+                />
+              );
+            }
+
+            if (name === 'justwatchLinks') {
+              return (
+                <JustwatchLinksCell
+                  justwatchUrl={justwatchUrl}
+                  netflixUrl={netflixUrl}
+                  primeVideoUrl={primeVideoUrl}
+                  tubiTVUrl={tubiTVUrl}
+                  hooplaUrl={hooplaUrl}
+                  className={styles[name]}
                   component={VirtualTableRowCell}
                 />
               );
@@ -447,6 +467,11 @@ MovieIndexRow.propTypes = {
   qualityProfile: PropTypes.object.isRequired,
   added: PropTypes.string,
   year: PropTypes.number,
+  justwatchUrl: PropTypes.string,
+  netflixUrl: PropTypes.string,
+  primeVideoUrl: PropTypes.string,
+  tubiTVUrl: PropTypes.string,
+  hooplaUrl: PropTypes.string,
   inCinemas: PropTypes.string,
   physicalRelease: PropTypes.string,
   digitalRelease: PropTypes.string,

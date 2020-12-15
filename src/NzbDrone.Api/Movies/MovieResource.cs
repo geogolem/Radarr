@@ -40,6 +40,13 @@ namespace NzbDrone.Api.Movies
         public string YouTubeTrailerId { get; set; }
         public string Studio { get; set; }
 
+        //Justwatch Support
+        public string NetflixUrl { get; set; }
+        public string PrimeVideoUrl { get; set; }
+        public string HooplaUrl { get; set; }
+        public string TubiTVUrl { get; set; }
+        public string JustwatchUrl { get; set; }
+
         //View & Edit
         public string Path { get; set; }
         public int ProfileId { get; set; }

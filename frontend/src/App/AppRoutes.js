@@ -17,6 +17,7 @@ import DownloadClientSettingsConnector from 'Settings/DownloadClients/DownloadCl
 import GeneralSettingsConnector from 'Settings/General/GeneralSettingsConnector';
 import ImportListSettingsConnector from 'Settings/ImportLists/ImportListSettingsConnector';
 import IndexerSettingsConnector from 'Settings/Indexers/IndexerSettingsConnector';
+import JustwatchSettingsConnector from 'Settings/Justwatch/JustwatchSettingsConnector';
 import MediaManagementConnector from 'Settings/MediaManagement/MediaManagementConnector';
 import MetadataSettings from 'Settings/Metadata/MetadataSettings';
 import NotificationSettings from 'Settings/Notifications/NotificationSettings';
@@ -183,6 +184,11 @@ function AppRoutes(props) {
       <Route
         path="/settings/ui"
         component={UISettingsConnector}
+      />
+
+      <Route
+        path="/settings/justwatch"
+        component={JustwatchSettingsConnector}
       />
 
       {/*

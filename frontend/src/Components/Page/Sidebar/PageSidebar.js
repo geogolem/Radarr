@@ -119,6 +119,10 @@ const links = [
       {
         title: translate('UI'),
         to: '/settings/ui'
+      },
+      {
+        title: 'Justwatch',
+        to: '/settings/justwatch'
       }
     ]
   },
