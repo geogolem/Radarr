@@ -139,6 +139,30 @@ export const filterPredicates = {
     return dateFilterPredicate(item.digitalRelease, filterValue, type);
   },
 
+  netflixUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.netflixUrl, filterValue, type);
+  },
+
+  primeVideoUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.primeVideoUrl, filterValue, type);
+  },
+
+  tubiTVUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.tubiTVUrl, filterValue, type);
+  },
+
+  hooplaUrl: function(item, filterValue, type) {
+    const predicate = filterTypePredicates[type];
+
+    return predicate(item.hooplaUrl, filterValue, type);
+  },
+
   ratings: function(item, filterValue, type) {
     const predicate = filterTypePredicates[type];
 

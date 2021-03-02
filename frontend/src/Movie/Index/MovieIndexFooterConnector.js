@@ -15,7 +15,11 @@ function createUnoptimizedSelector() {
           status,
           statistics,
           sizeOnDisk,
-          hasFile
+          hasFile,
+          netflixUrl,
+          primeVideoUrl,
+          tubiTVUrl,
+          hooplaUrl
         } = s;
 
         return {
@@ -23,7 +27,11 @@ function createUnoptimizedSelector() {
           status,
           statistics,
           sizeOnDisk,
-          hasFile
+          hasFile,
+          netflixUrl,
+          primeVideoUrl,
+          tubiTVUrl,
+          hooplaUrl
         };
       });
     }
